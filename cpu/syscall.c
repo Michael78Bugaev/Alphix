@@ -4,9 +4,9 @@
 
 #include <cpu/syscall.h>
 #include <cpu/idt.h>
-#include <out/vbe_terminal.h>
 #include <cpu/cpu.h>
 #include <in/keyboard.h>
+#include <kprintf.h>
 
 // sys_read: fd=0 -> stdin (keyboard buffer)
 static uint64_t sys_read(uint64_t fd, char *buf, uint64_t count)
@@ -31,7 +31,7 @@ static uint64_t sys_write(uint64_t fd, const char *buf, uint64_t count)
 {
     if (fd == 1 || fd == 2) {
         for (uint64_t i = 0; i < count; ++i) {
-            vbe_terminal_putchar(buf[i]);
+            kprintf("%c", buf[i]);
         }
         return count;
     }

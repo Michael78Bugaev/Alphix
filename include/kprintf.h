@@ -7,9 +7,9 @@
 
 #include <stdarg.h>
 
-// Форматированный вывод в kernel (VBE terminal)
+// Форматированный вывод в kernel (VGA terminal)
 void kvprintf(const char *fmt, va_list ap);
 void kprintf(const char *fmt, ...);
-unsigned char *kscan();
+void kscan(char *buf);
 
 #endif // _ALPHIX_KPRINTF_H 

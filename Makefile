@@ -9,10 +9,10 @@ GRUB_MKRESCUE = grub-mkrescue
 # Флаги компиляции
 CFLAGS = -std=gnu99 -ffreestanding -O2 -Wall -Wextra \
          -fno-stack-protector -mno-red-zone -mno-mmx -mno-sse -mno-sse2 \
-         -mcmodel=kernel -fno-pic -no-pie -I include
+         -mcmodel=kernel -fno-pic -no-pie -I include -nostdlib
 
 ASFLAGS = -f elf64
-LDFLAGS = -n -T kernel/linker.ld
+LDFLAGS = -n -T kernel/linker.ld --allow-multiple-definition
 
 # Директории
 KERNEL_DIR = kernel

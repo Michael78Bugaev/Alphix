@@ -5,7 +5,7 @@
 #include <cpu/apic.h>
 #include <cpu/cpu.h>
 #include <cpu/idt.h>
-#include <out/vbe_terminal.h>
+#include <out/vga.h>
 
 // APIC register offsets
 #define APIC_OFFSET_ID        0x020
@@ -58,7 +58,10 @@ void apic_handler(cpu_registers_t *regs)
     // Мигаем курсором с заданным интервалом
     if (++blink_counter >= BLINK_INTERVAL) {
         blink_counter = 0;
-        vbe_terminal_toggle_cursor();
+        // Для VGA используем аппаратный курсор - просто получаем текущую позицию
+        uint16_t current_pos = get_cursor();
+        // Просто переустанавливаем курсор в ту же позицию для мигания
+        set_cursor(current_pos);
     }
 
     // Send EOI to APIC
